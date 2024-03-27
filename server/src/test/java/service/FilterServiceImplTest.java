@@ -1,5 +1,6 @@
 package service;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,40 +40,38 @@ public class FilterServiceImplTest {
 
     @Test
     public void testCreateFilter() {
-        filterService.createFilter(FilterWithCriteriaDTO.builder().name("Test1")
+        FilterWithCriteriaDTO createdFilter = filterService.createFilter(FilterWithCriteriaDTO.builder().name("Test1")
                 .criteriaDTOList(List.of())
                 .build());
-        Long filterId = filterService.listAllFilters().get(0).getId();
-        assertEquals(filterService.listAllFilters().size(), 1);
-        filterService.deleteFilter(filterId);
+        assertEquals(3, filterService.listAllFilters().size());
+        filterService.deleteFilter(createdFilter.getId());
     }
 
     @Test
     public void testDeleteFilter() {
-        filterService.createFilter(FilterWithCriteriaDTO.builder().name("Test1")
+        FilterWithCriteriaDTO createdFilter = filterService.createFilter(FilterWithCriteriaDTO.builder().name("Test1")
                 .criteriaDTOList(List.of())
                 .build());
-        filterService.deleteFilter(filterService.listAllFilters().get(0).getId());
-        assertEquals(0, filterService.listAllFilters().size());
+        filterService.deleteFilter(createdFilter.getId());
+        assertEquals(2, filterService.listAllFilters().size());
     }
 
     @Test
     public void testGetFilterById() {
-        filterService.createFilter(FilterWithCriteriaDTO.builder().name("Test1")
+        FilterWithCriteriaDTO createdFilter = filterService.createFilter(FilterWithCriteriaDTO.builder().name("Test1")
                 .criteriaDTOList(List.of())
                 .build());
-        Long filterId = filterService.listAllFilters().get(0).getId();
-        FilterWithCriteriaDTO expected = FilterWithCriteriaDTO.builder().id(filterId)
+        FilterWithCriteriaDTO expected = FilterWithCriteriaDTO.builder().id(createdFilter.getId())
                 .name("Test1")
                 .criteriaDTOList(List.of()).build();
-        assertEquals(filterService.getFilter(filterId).get(), expected);
-        filterService.deleteFilter(filterId);
+        assertEquals(expected, filterService.getFilter(createdFilter.getId()).get());
+        filterService.deleteFilter(createdFilter.getId());
     }
 
     @Test
     @Transactional
     public void testUpdateFilter() throws ParseException {
-        filterService.createFilter(FilterWithCriteriaDTO.builder().name("Test1")
+        FilterWithCriteriaDTO createdFilter = filterService.createFilter(FilterWithCriteriaDTO.builder().name("Test1")
                         .criteriaDTOList(List.of(
                                 AmountCriteriaDTO.builder()
                                     .comparableValue(4)
@@ -86,7 +85,7 @@ public class FilterServiceImplTest {
                                         .comparableName("NewName")
                                         .comparingCondition("Contains").build()
                                 )).build());
-        Long filterId = filterService.listAllFilters().get(0).getId();
+        Long filterId = createdFilter.getId();
         FilterWithCriteriaDTO newlyCreatedFilter = filterService.getFilter(filterId).get();
         Optional<FilterWithCriteriaDTO> newFilter = filterService.updateFilter(filterId,
                 FilterWithCriteriaDTO.builder()
