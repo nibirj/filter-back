@@ -20,14 +20,22 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <dependency.org.springframework.boot>3.2.3</dependency.org.springframework.boot>
+        <dependency.spring-boot-starter-data-jpa>3.2.3</dependency.spring-boot-starter-data-jpa>
+        <dependency.pringdoc-openapi-starter-webmvc-ui>2.0.2</dependency.pringdoc-openapi-starter-webmvc-ui>
+        <dependency.jaxb-api>2.3.1</dependency.jaxb-api>
+        <dependency.spring-test>6.1.5</dependency.spring-test>
+        <dependency.jaxb-api>2.3.1</dependency.jaxb-api>
+        <dependency.junit>4.13</dependency.junit>
+        <dependency.equalsverifier>3.15.8</dependency.equalsverifier>
+        <dependency.javax.annotation-api>1.3.2</dependency.javax.annotation-api>
+        <dependency.mockito-core>5.11.0</dependency.mockito-core>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-            <version>${dependency.org.springframework.boot}</version>
+            <version>${dependency.spring-boot-starter-data-jpa}</version>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
@@ -36,7 +44,7 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>2.0.2</version>
+            <version>${dependency.pringdoc-openapi-starter-webmvc-ui}</version>
         </dependency>
     </dependencies>
 

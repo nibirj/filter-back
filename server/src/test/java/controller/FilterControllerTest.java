@@ -103,7 +103,6 @@ public class FilterControllerTest {
         when(service.getFilter((long) 2)).thenReturn(Optional.empty());
         final MvcResult mvcResult = mvc.perform(get(this.url + "filter/2")
                         .accept(MediaType.APPLICATION_JSON))
-                .andDo(print())
                 .andExpect(status().isNotFound())
                 .andReturn();
         assertEquals(mvcResult.getResponse().getStatus(), 404);
